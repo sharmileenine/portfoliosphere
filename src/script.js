@@ -383,7 +383,7 @@ let lastParticleTime = 0;  // Tracks when the last particle was created
 const particleInterval = 1 / 30;  // Time interval for particle creation (e.g., 1/30 seconds for 30 particles per second)
 let startTime = performance.now();  // Initial time reference
 let elapsedTimenew = 0;  // Tracks total elapsed time
-let maxDeltaTime = 0.2;  // Max delta time allowed to avoid large time jumps (0.2 seconds = 200ms)
+//let maxDeltaTime = 0.2;  // Max delta time allowed to avoid large time jumps (0.2 seconds = 200ms)
 
 
 
@@ -485,9 +485,9 @@ const tick = () =>
     let deltaTime = (currentTime - startTime) / 1000;  // Convert to seconds
 
     // Prevent large jumps in time due to tab inactivity (like after 1 minute away)
-    if (deltaTime > maxDeltaTime) {
-       deltaTime = maxDeltaTime;  // Cap deltaTime to a reasonable value
-    }
+    //if (deltaTime > maxDeltaTime) {
+    //   deltaTime = maxDeltaTime;  // Cap deltaTime to a reasonable value
+    //}
 
     elapsedTimenew += deltaTime;  // Update elapsed time in seconds
     startTime = currentTime;  // Reset start time for the next frame

@@ -426,9 +426,10 @@ const tick = () =>
         fpsgenericcalculate = 60 / frameCount;
         let fpsroundedValue = Math.round(fpsgenericcalculate);
         particleSpeed = (0.048 / frameCount) * fpsroundedValue; // gives 0.0008 for 60fps
-        //console.log(fpsroundedValue);
-        //console.log(fpsgenericcalculate);
-        //console.log(particleSpeed);
+        console.log(frameCount);
+        console.log(fpsgenericcalculate);
+        console.log(fpsroundedValue);
+        console.log(particleSpeed);
     }
 
 

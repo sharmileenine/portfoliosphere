@@ -390,39 +390,37 @@ let maxDeltaTime = 0.2;  // Max delta time allowed to avoid large time jumps (0.
 
 //
     let centerPosition = new THREE.Vector3
-    let particlevaluemax = 0
-    let maxlimit = 0
+    //let particlevaluemax = 0
+    //let maxlimit = 0
 //
 
 
 
 
 
-let isTabActive = false;
+//let isTabActive = false;
 
     //window.addEventListener('blur', () => {
     //isTabActive = false;
     //console.log("Tab is inactive (blur event triggered).");
     //});
 
-    window.addEventListener('focus', () => {
-    isTabActive = true;
+    //window.addEventListener('focus', () => {
+    //isTabActive = true;
     //console.log("Tab is active (focus event triggered).");
-  });
+  //});
 
 
-  let timenew = 0;
-  let hasRun = false;
+  //let timenew = 0;
+  //let hasRun = false;
+  let waitcoderun = false;
 
 
 const tick = () =>
 {
 
 
-    //console.log(frameCount)
-    //console.log(fpsgenericcalculate)
-    //console.log(fpsroundedValue)
-    //console.log(particleSpeed)
+
 
     //Using Clock
     const elapsedTime = clock.getElapsedTime()
@@ -432,39 +430,30 @@ const tick = () =>
 
 
 
-    if (isTabActive == true)
-    {
-        
-        if (!hasRun)
+    if (waitcoderun == false)
         {
-            timenew = Date.now() //Construct time\ //Get current time value
-            hasRun = true
-        }
 
-        const currentTime = Date.now() //Act as current time
-        const deltaTime = currentTime - timenew //Getting margin - Gives values in integers
-        let seconds = Math.floor(deltaTime / 1000);
-        //console.log(seconds)
-        
-
-        if (countingFrames) {
-            frameCount++;
-            if (seconds >= 1) 
-                {
-                    countingFrames = false; // Stop counting frames
-                    //console.log(countingFrames)
-                    //console.log(frameCount)
+            if (countingFrames) {
+                    frameCount++;
+                    if (clock.getElapsedTime() > 1) {
+                        countingFrames = false; // Stop counting frames
+                    }
                 }
-        }
 
-        if (countingFrames == false)
-            {
-                fpsgenericcalculate = 60 / frameCount;
-                let fpsroundedValue = Math.round(fpsgenericcalculate);
-                particleSpeed = (0.048 / frameCount) * fpsroundedValue; // gives 0.0008 for 60fps
-                
-            }
-    }
+
+            if (countingFrames == false)
+                    {
+                        if (frameCount < 60)
+                        {
+                            frameCount = 60
+                        }
+                        fpsgenericcalculate = 60 / frameCount;
+                        let fpsroundedValue = Math.round(fpsgenericcalculate);
+                        particleSpeed = (0.048 / frameCount) * fpsroundedValue; // gives 0.0008 for 60fps
+                        
+                        waitcoderun = true
+                    }
+        }
 
     
     
@@ -575,7 +564,7 @@ const tick = () =>
     
             // If lifeTime is not set, set it between 1 to 10 seconds
             if (!particle.userData.lifeTime) {
-                particle.userData.lifeTime = 40;//Math.random() * 9 + 1; // Random time between 1 and 10 seconds
+                particle.userData.lifeTime = 48;//Math.random() * 9 + 1; // Random time between 1 and 10 seconds
                 particle.userData.startTime = elapsedTime; // Record when the timer starts
             }
     
@@ -591,10 +580,10 @@ const tick = () =>
     // Check if enough time has passed to create a new particle
     if (elapsedTimenew - lastParticleTime >= particleInterval) {
         if (particles.length < maxParticles) {
-            if (countingFrames == false)
-            {
+            //if (countingFrames == false)
+            //{
                 //createParticle();  // Create a new particle 
-            }
+            //}
             createParticle();  // Create a new particle
         }
         lastParticleTime = elapsedTimenew;  // Reset last particle creation time

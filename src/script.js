@@ -398,19 +398,78 @@ let maxDeltaTime = 0.2;  // Max delta time allowed to avoid large time jumps (0.
 
 
 
+let isTabActive = false;
+
+    //window.addEventListener('blur', () => {
+    //isTabActive = false;
+    //console.log("Tab is inactive (blur event triggered).");
+    //});
+
+    window.addEventListener('focus', () => {
+    isTabActive = true;
+    //console.log("Tab is active (focus event triggered).");
+  });
+
+
+  let timenew = 0;
+  let hasRun = false;
+
 
 const tick = () =>
 {
-    if (!document.hidden)
-        {
-            if (countingFrames) {
-                frameCount++;
-                if (clock.getElapsedTime() > 1) {
-                    countingFrames = false; // Stop counting frames
-                }
-            }
-        }
+
+
+    //console.log(frameCount)
+    //console.log(fpsgenericcalculate)
+    //console.log(fpsroundedValue)
+    //console.log(particleSpeed)
+
+    //Using Clock
+    const elapsedTime = clock.getElapsedTime()
+
+
     
+
+
+
+    if (isTabActive == true)
+    {
+        
+        if (!hasRun)
+        {
+            timenew = Date.now() //Construct time\ //Get current time value
+            hasRun = true
+        }
+
+        const currentTime = Date.now() //Act as current time
+        const deltaTime = currentTime - timenew //Getting margin - Gives values in integers
+        let seconds = Math.floor(deltaTime / 1000);
+        //console.log(seconds)
+        
+
+        if (countingFrames) {
+            frameCount++;
+            if (seconds >= 1) 
+                {
+                    countingFrames = false; // Stop counting frames
+                    //console.log(countingFrames)
+                    //console.log(frameCount)
+                }
+        }
+
+        if (countingFrames == false)
+            {
+                fpsgenericcalculate = 60 / frameCount;
+                let fpsroundedValue = Math.round(fpsgenericcalculate);
+                particleSpeed = (0.048 / frameCount) * fpsroundedValue; // gives 0.0008 for 60fps
+                
+            }
+    }
+
+    
+    
+
+
     //else {
     
     //}
@@ -420,25 +479,6 @@ const tick = () =>
     //    frameCount = 0;
     //    countingFrames = false; // Stop counting frames
     //}
-
-    if (countingFrames == false)
-    {
-        fpsgenericcalculate = 60 / frameCount;
-        let fpsroundedValue = Math.round(fpsgenericcalculate);
-        particleSpeed = (0.048 / frameCount) * fpsroundedValue; // gives 0.0008 for 60fps
-        
-    }
-
-
-
-
-    console.log(frameCount)
-    console.log(fpsgenericcalculate)
-    console.log(fpsroundedValue)
-    console.log(particleSpeed)
-
-    //Using Clock
-    const elapsedTime = clock.getElapsedTime()
 
     
 

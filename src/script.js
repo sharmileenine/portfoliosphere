@@ -285,11 +285,11 @@ window.addEventListener('resize', () => //updating the camera in continuous list
     const camera = new THREE.PerspectiveCamera(40, sizes.width / sizes.height, 1, 1000) // 2.8, 1000
     if (sizes.width < 1024)
     {
-        camera.position.set(0, 0, 5)
+        camera.position.set(0, 0, 6)
     }
     else
     {
-        camera.position.set(0, 0, 4)
+        camera.position.set(0, 0, 4.6)
     }
     
     scene.add(camera)
@@ -564,7 +564,7 @@ const tick = () =>
     
             // If lifeTime is not set, set it between 1 to 10 seconds
             if (!particle.userData.lifeTime) {
-                particle.userData.lifeTime = 48;//Math.random() * 9 + 1; // Random time between 1 and 10 seconds
+                particle.userData.lifeTime = 8;//Math.random() * 9 + 1; // Random time between 1 and 10 seconds
                 particle.userData.startTime = elapsedTime; // Record when the timer starts
             }
     
